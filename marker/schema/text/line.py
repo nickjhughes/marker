@@ -96,7 +96,9 @@ class Line(Block):
 
     def merge(self, other: "Line"):
         self.polygon = self.polygon.merge([other.polygon])
-        self.structure = self.structure + other.structure
+        self_structure = self.structure if self.structure is not None else []
+        other_structure = other.structure if other.structure is not None else []
+        self.structure = self_structure + other_structure
         if self.formats is None:
             self.formats = other.formats
         elif other.formats is not None:
